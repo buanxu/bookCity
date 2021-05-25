@@ -37,7 +37,7 @@ public class BeanUtils {
         try {
             return Integer.parseInt(value);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return defaultValue;
     }

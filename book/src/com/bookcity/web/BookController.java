@@ -31,6 +31,9 @@ public class BookController extends BaseServlet {
         int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
         //调用service获取Page对象
         Page<Book> page = bookService.page(pageNo, pageSize);
+
+        //设置分页条请求的url
+        page.setUrl("manager/bookController?action=page");
         //把page存到request域
         req.setAttribute("page", page);
         //转发到list页面

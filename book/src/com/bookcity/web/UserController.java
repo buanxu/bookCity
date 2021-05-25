@@ -64,9 +64,18 @@ public class UserController extends BaseServlet {
             req.setAttribute("errorMsg", "用户名或密码错误！");
             req.setAttribute("username",username );
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req ,resp);
-        }else {//成功
+        }else {//登录成功
+            req.getSession().setAttribute("user",loginUser);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req ,resp);
         }
+    }
+
+    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //用户退出时销毁session(或销毁session中用户的信息)
+        req.getSession().invalidate();
+
+        //退出后重定向到index
+        resp.sendRedirect(req.getContextPath());
     }
 
 

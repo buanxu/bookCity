@@ -21,4 +21,13 @@
         <servlet-name>BookController</servlet-name>
         <url-pattern>/manager/bookController</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClientController</servlet-name>
+        <servlet-class>com.bookcity.web.ClientController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientController</servlet-name>
+        <url-pattern>/client/clientController</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -5,10 +5,10 @@
   Time: 18:13
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div>
-    <span>欢迎<span class="um_span">靓仔</span>光临岳麓书城</span>
+    <span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临岳麓书城</span>
     <a href="./order/order.jsp">我的订单</a>
-    <a href="./index.jsp">注销</a>&nbsp;&nbsp;
+    <a href="./user?action=logout">注销</a>&nbsp;&nbsp;
     <a href="./index.jsp">返回</a>
 </div>
