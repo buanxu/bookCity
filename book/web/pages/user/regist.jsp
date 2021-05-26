@@ -10,6 +10,14 @@
 
 	<script type="text/javascript">
 		$(function () {
+			//给验证码图片绑定单击事件，以刷新验证码图片
+			$("#verifyCode").click(function () {
+				//在事件响应的function函数中有一个this对象，它是当前正在响应事件的dom对象，即img标签对象
+				//src是img的属性可读可写，在重新赋值后会重新发出请求
+				//加时间戳是为了避免由于浏览器缓存的原因而导致的图片不可刷新
+			this.src="${basepath}kaptcha.jsp?med="+new Date();
+			});
+
 			$("#sub_btn").click(function () {
 				// 验证用户名：必须由字母，数字下划线组成，并且长度为 5 到 12 位
 				//1.先获取用户名
@@ -128,7 +136,7 @@
 									<br />
 									<label>验证码：</label>
 									<input class="itxt" type="text" style="width: 150px;" id="code" name="code"/>
-									<img alt="" src="./static/img/code.bmp" style="float: right; margin-right: 40px">
+									<img id="verifyCode" alt="" src="./kaptcha.jsp" style="float: right; margin-right: 20px;width:100px;height:45px">
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />
@@ -137,8 +145,7 @@
 							</div>
 							
 						</div>
-					</div>
-				</div>
+					</div>				</div>
 			</div>
 		<%--	静态包含页脚--%>
 		<%@include file="/pages/common/footer.jsp"%>>

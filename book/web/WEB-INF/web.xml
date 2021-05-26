@@ -30,4 +30,22 @@
         <servlet-name>ClientController</servlet-name>
         <url-pattern>/client/clientController</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>kaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>kaptchaServlet</servlet-name>
+        <url-pattern>/kaptcha.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>com.bookcity.web.CartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cartController</url-pattern>
+    </servlet-mapping>
 </web-app>

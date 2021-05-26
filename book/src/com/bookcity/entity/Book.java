@@ -4,6 +4,9 @@ import com.sun.org.apache.xpath.internal.objects.XNull;
 
 import java.math.BigDecimal;
 
+/**
+ * 图书商品的信息
+ */
 public class Book {
     private Integer id;
     private String name;

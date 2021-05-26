@@ -2,6 +2,9 @@ package com.bookcity.entity;
 
 import java.io.Serializable;
 
+/**
+ * 用户模型
+ */
 public class User implements Serializable {
     private Integer id;
     private String username;

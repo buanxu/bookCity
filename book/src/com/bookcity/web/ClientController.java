@@ -57,6 +57,8 @@ public class ClientController extends BaseServlet {
         int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
         int min=BeanUtils.parseInt(req.getParameter("min"), 0);
         int max=BeanUtils.parseInt(req.getParameter("max"), Integer.MAX_VALUE);
+        System.out.println("min："+min);
+        System.out.println("max："+max);
         //调用service获取Page对象
         Page<Book> page = clientService.pageByPrice(min,max,pageNo, pageSize);
 

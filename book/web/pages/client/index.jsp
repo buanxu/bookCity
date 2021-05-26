@@ -8,6 +8,17 @@
 <title>书城首页</title>
 	<%--	静态包含base标签、css样式、jQuery文件--%>
 	<%@include file="/pages/common/head.jsp"%>
+
+	<script type="text/javascript">
+		$(function () {
+			//给加入购物车按钮绑定单击事件，请求后台的cartController
+			$("button.addToCart").click(function () {
+				//$(this)是把 dom对象转换成jquery对象，然后获取对象的bookId属性的值
+				var bookId=$(this).attr("bookId");
+				location.href="${basePath}cartController?action=addItem&id="+bookId;
+			});
+		});
+	</script>
 </head>
 <body>
 	<br/>
@@ -40,12 +51,24 @@
 						<input type="submit" value="查询" />
 				</form>
 			</div>
-			<div style="text-align: center">
-				<span>您的购物车中有3件商品</span>
-				<div>
-					您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
+			<%--购物车为空时的输出信息--%>
+			<c:if test="${empty sessionScope.cart.items}">
+				<div style="text-align: center">
+					<span></span>
+					<div>
+						<span style="color: red">当前购物车为空</span>
+					</div>
 				</div>
-			</div>
+			</c:if>
+			<%--购物车非空时的输出信息--%>
+			<c:if test="${not empty sessionScope.cart.items}">
+				<div style="text-align: center">
+					<span>您的购物车中有${sessionScope.cart.totalCounts}件商品</span>
+					<div>
+						您刚刚将<span style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+					</div>
+				</div>
+			</c:if>
 
 			<c:forEach var="book" items="${requestScope.page.items}">
 				<div class="b_list">
@@ -73,8 +96,8 @@
 							<span class="sp1">库存:</span>
 							<span class="sp2">${book.stock}</span>
 						</div>
-						<div class="book_add">
-							<button>加入购物车</button>
+						<div  class="book_add">
+							<button bookId="${book.id}" class="addToCart">加入购物车</button>
 						</div>
 					</div>
 				</div>
