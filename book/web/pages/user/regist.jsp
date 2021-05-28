@@ -126,7 +126,7 @@
 					<div class="login_form">
 						<div class="login_box">
 							<div class="tit">
-								<h1>注册岳麓书城会员</h1>
+								<h1>注册岳麓书苑会员</h1>
 								<span class="errorMsg" >
 									${requestScope.errorMsg}
 								</span>

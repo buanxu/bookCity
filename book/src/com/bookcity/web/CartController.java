@@ -55,6 +55,10 @@ public class CartController extends BaseServlet {
         //把最后一次添加到购物车的商品名称和购物车总商品数转成json格式的数据传回前台
         Integer cartTotalCounts = cart.getTotalCounts();
         String lastName=cartItem.getName();
+        req.getSession().removeAttribute("cartTotalCounts");
+        req.getSession().removeAttribute("lastName");
+        req.getSession().setAttribute("cartTotalCounts",cartTotalCounts);
+        req.getSession().setAttribute("lastName",lastName);
         //把数据封装在map里
         Map<String,Object> map=new HashMap<>();
         map.put("cartTotalCounts",cartTotalCounts);

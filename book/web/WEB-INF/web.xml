@@ -64,7 +64,9 @@
     </filter>
     <filter-mapping>
         <filter-name>ManagerFilter</filter-name>
+        <!--查看后台图书管理的时候时候，进行拦截，判断是否登录了，只有登录了才能访问，没登陆就跳转到登陆页面-->
         <url-pattern>/pages/manager/*</url-pattern>
+        <!--在浏览器地址栏输入该地址时，没登陆也可以直接访问后台管理，所以对此路径进行拦截-->
         <url-pattern>/manager/bookController</url-pattern>
     </filter-mapping>
 
@@ -84,7 +86,6 @@
         <!--tomcat服务器捕捉到异常后要跳转去的页面-->
         <location>/pages/error/error500.jsp</location>
     </error-page>
-
     <error-page>
         <!--error-code  是错误类型-->
         <error-code>404</error-code>

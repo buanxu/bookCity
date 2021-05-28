@@ -275,3 +275,7 @@ h1 {
 #header div a {
 	color: blue;
 }
+
+.bodyStyle{
+	background-color: deepskyblue;
+}

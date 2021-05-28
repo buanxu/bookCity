@@ -11,7 +11,7 @@
     <title>404</title>
 </head>
 <body>
-<a href="./index.jsp" style="color: blue">回首页</a>
+<a href="/book/index.jsp" style="color: blue">回首页</a>
 <h2 style="margin-top: 200px;margin-left: 500px">访问路径错误，请检查后重新请求！</h2>
 
 </body>

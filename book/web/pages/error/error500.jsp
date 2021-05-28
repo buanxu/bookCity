@@ -11,7 +11,7 @@
     <title>500</title>
 </head>
 <body>
-    <a href="index.jsp" style="color: blue">回首页</a>
+    <a href="/book/index.jsp" style="color: blue">回首页</a>
     <h2 style="margin-top: 200px;margin-left: 500px;">服务器内部错误，请联系管理员或稍后再试！</h2>
 
 </body>

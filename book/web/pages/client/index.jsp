@@ -18,10 +18,11 @@
 				//刷新整个页面
 				//location.href="${basePath}cartController?action=addItem&id="+bookId;
 
-
+				alert("当前购物车中的总的商品数:"+${sessionScope.cart.totalCounts});
+				alert("当前购物车中的总的商品数:"+${sessionScope.cartTotalCounts});
 				//用ajax请求向购物车里添加数据，局部更新
 				$.getJSON("${basePath}cartController?","action=ajaxAddItem&id="+bookId,function (data) {
-					console.log(data);
+
 					$("#itemCounts").text("您的购物车中有"+data.cartTotalCounts+"件商品");
 					$("#lastName").text(data.lastName);
 				})
@@ -43,9 +44,9 @@
 				<%--用户登录了，就显示用户信息--%>
 				<c:if test="${not empty sessionScope.user}">
 					<span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临岳麓书城</span>
-					<a href="page/order/order.jsp">我的订单</a>
+					<a href="pages/order/order.jsp">我的订单</a>
 					<a href="./user?action=logout">注销</a>&nbsp;&nbsp;
-				</c:if> &nbsp;&nbsp;
+				</c:if>
 				<a href="pages/cart/cart.jsp">购物车</a>
 				<a href="pages/manager/manager.jsp">后台管理</a>
 			</div>
@@ -63,9 +64,9 @@
 			<%--购物车为空时的输出信息--%>
 			<c:if test="${empty sessionScope.cart.items}">
 				<div style="text-align: center">
-					<span></span>
+					<span id="itemCounts" ></span>
 					<div>
-						<span style="color: red">当前购物车为空</span>
+						<span style="color: red" id="lastName">当前购物车为空</span>
 					</div>
 				</div>
 			</c:if>

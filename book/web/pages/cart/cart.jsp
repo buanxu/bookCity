@@ -42,7 +42,7 @@
 		});
 	</script>
 </head>
-<body>
+<body >
 	
 	<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png" >

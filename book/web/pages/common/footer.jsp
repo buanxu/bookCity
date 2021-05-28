@@ -8,6 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="bottom">
 		<span>
-			岳麓书城.Copyright &copy;2021.5
+			岳麓书苑.Copyright &copy;2021.5
 		</span>
 </div>
