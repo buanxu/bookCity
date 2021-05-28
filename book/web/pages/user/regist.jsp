@@ -10,6 +10,21 @@
 
 	<script type="text/javascript">
 		$(function () {
+
+			//检查用户名是否可用(是否已存在)
+			$("#username").blur(function () {
+				var username=this.value;
+				//通过ajax向后台请求
+				$.getJSON("${basePath}user","action=ajaxExistUsername&username="+username,function (data) {
+					//传回来false表示用户名不存在，true表示已存在
+					if (data.isExistsUsername){
+						$("span.errorMsg").text("用户名已存在！");
+					}else {
+						$("span.errorMsg").text("用户名可用！");
+					}
+				});
+			});
+
 			//给验证码图片绑定单击事件，以刷新验证码图片
 			$("#verifyCode").click(function () {
 				//在事件响应的function函数中有一个this对象，它是当前正在响应事件的dom对象，即img标签对象
@@ -84,6 +99,7 @@
 
 				//验证成功，去掉提示信息
 				$("span.errorMsg").text("");
+
 			});
 		});
 	</script>

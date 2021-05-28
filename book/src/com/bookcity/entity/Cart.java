@@ -32,7 +32,7 @@ public class Cart implements Serializable {
             items.put(item.getId(), item);
         }else {//否则已添加
             //更新商品数量
-            cartItem.setCounts(item.getCounts()+1);
+            cartItem.setCounts(cartItem.getCounts()+1);
             //更新商品总金额
             cartItem.setTotalPrice(cartItem.getPrice().multiply(new BigDecimal(cartItem.getCounts())));
         }

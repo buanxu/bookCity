@@ -48,4 +48,47 @@
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cartController</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>com.bookcity.web.OrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/orderController</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.bookcity.filter.ManagerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <url-pattern>/pages/manager/*</url-pattern>
+        <url-pattern>/manager/bookController</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>TransactionFilter</filter-name>
+        <filter-class>com.bookcity.filter.TransactionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TransactionFilter</filter-name>
+        <!--拦截所有请求，给所有请求都加上事务-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <error-page>
+        <!--error-code  是错误类型-->
+        <error-code>500</error-code>
+        <!--tomcat服务器捕捉到异常后要跳转去的页面-->
+        <location>/pages/error/error500.jsp</location>
+    </error-page>
+
+    <error-page>
+        <!--error-code  是错误类型-->
+        <error-code>404</error-code>
+        <!--tomcat服务器捕捉到异常后要跳转去的页面-->
+        <location>/pages/error/error404.jsp</location>
+    </error-page>
 </web-app>

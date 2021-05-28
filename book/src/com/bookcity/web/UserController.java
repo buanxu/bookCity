@@ -4,17 +4,42 @@ import com.bookcity.entity.User;
 import com.bookcity.service.UserService;
 import com.bookcity.service.impl.UserServiceImpl;
 import com.bookcity.utils.BeanUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
 public class UserController extends BaseServlet {
 
     private UserService userService=new UserServiceImpl();
+
+    /**
+     * 通过ajax判断当前注册的用户名是否存在
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
+    public void ajaxExistUsername(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //获取注册的用户名
+        String username=req.getParameter("username");
+        //查询数据库里是否存在该用户名
+        boolean isExistsUsername = userService.existsUsername(username);
+        //把查询结果封装在map里
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("isExistsUsername",isExistsUsername);
+
+        //把map对象转换成String类型的数据传回前台
+        Gson gson=new Gson();
+        String json=gson.toJson(map);
+        resp.getWriter().print(json);
+
+    }
 
     /**
      * kaptcha谷歌验证码，使用需要导依赖，
@@ -76,6 +101,7 @@ public class UserController extends BaseServlet {
             req.setAttribute("username",username );
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req ,resp);
         }else {//登录成功
+            //用户信息保存到session域
             req.getSession().setAttribute("user",loginUser);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req ,resp);
         }

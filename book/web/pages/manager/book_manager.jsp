@@ -47,7 +47,6 @@
 				<td colspan="2">操作</td>
 			</tr>
 
-
 			<c:forEach  items="${requestScope.page.items}" var="book">
 				<tr>
 					<td>${book.name}</td>

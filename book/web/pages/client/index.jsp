@@ -15,7 +15,16 @@
 			$("button.addToCart").click(function () {
 				//$(this)是把 dom对象转换成jquery对象，然后获取对象的bookId属性的值
 				var bookId=$(this).attr("bookId");
-				location.href="${basePath}cartController?action=addItem&id="+bookId;
+				//刷新整个页面
+				//location.href="${basePath}cartController?action=addItem&id="+bookId;
+
+
+				//用ajax请求向购物车里添加数据，局部更新
+				$.getJSON("${basePath}cartController?","action=ajaxAddItem&id="+bookId,function (data) {
+					console.log(data);
+					$("#itemCounts").text("您的购物车中有"+data.cartTotalCounts+"件商品");
+					$("#lastName").text(data.lastName);
+				})
 			});
 		});
 	</script>
@@ -63,9 +72,9 @@
 			<%--购物车非空时的输出信息--%>
 			<c:if test="${not empty sessionScope.cart.items}">
 				<div style="text-align: center">
-					<span>您的购物车中有${sessionScope.cart.totalCounts}件商品</span>
+					<span id="itemCounts">您的购物车中有${sessionScope.cart.totalCounts}件商品</span>
 					<div>
-						您刚刚将<span style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+						您刚刚将<span id="lastName" style="color: red">${sessionScope.lastName}</span>加入到了购物车中
 					</div>
 				</div>
 			</c:if>

@@ -28,7 +28,7 @@
         <c:when test="${requestScope.page.pageTotal<=5}">
             <%--设置起始和结束索引，然后让foreach执行--%>
             <c:set var="begin" value="1"></c:set>
-            <c:set var="end" value="{requestScope.page.pageTotal}"></c:set>
+            <c:set var="end" value="${requestScope.page.pageTotal}"></c:set>
         </c:when>
 
         <%--第二种情况，总的页码大于5 --%>

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class BaseDao {
+    private QueryRunner query=new QueryRunner();
 
     /**
      * QueryRunner操作数据库
@@ -21,17 +22,13 @@ public abstract class BaseDao {
      */
     public int update(String sql,Object ...params){
         Connection connection= JdbcUtils.getConnection();
-        QueryRunner query=new QueryRunner();
 
         try {
             return query.update(connection, sql, params);
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-
-        return  -1;
     }
 
     /**
@@ -44,17 +41,13 @@ public abstract class BaseDao {
      */
     public <T> T findOne(Class<T> type,String sql,Object ...params){
         Connection connection=JdbcUtils.getConnection();
-        QueryRunner query=new QueryRunner();
 
         try {
             return query.query(connection, sql, new BeanHandler<T>(type),params );
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-
-        return  null;
     }
 
     /**
@@ -67,16 +60,12 @@ public abstract class BaseDao {
      */
     public <T> List<T> findList(Class<T> type,String sql,Object ...params){
         Connection connection=JdbcUtils.getConnection();
-        QueryRunner query=new QueryRunner();
         try {
             return query.query(connection, sql, new BeanListHandler<>(type),params );
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-
-        return  null;
     }
 
     /**
@@ -87,16 +76,13 @@ public abstract class BaseDao {
      */
     public Object findSingleValue(String sql,Object ...params){
         Connection connection=JdbcUtils.getConnection();
-        QueryRunner query=new QueryRunner();
 
         try {
             return query.query(connection,sql,new ScalarHandler(),params);
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
 
-        return null;
     }
 }
