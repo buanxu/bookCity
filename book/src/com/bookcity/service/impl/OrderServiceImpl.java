@@ -10,6 +10,7 @@ import com.bookcity.entity.*;
 import com.bookcity.service.OrderService;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class OrderServiceImpl implements OrderService {
@@ -25,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
         //保存订单
         orderDao.save(order);
 
-        int i=10/0;
+//        int i=10/0;
 
         //遍历购物车，把其中的每一件商品都转换成订单项
         for (Map.Entry<Integer, CartItem> entry : cart.getItems().entrySet()){
@@ -46,5 +47,15 @@ public class OrderServiceImpl implements OrderService {
         cart.clearCart();
 
         return orderId;
+    }
+
+    @Override
+    public List<Order> findOrder(Integer userId) {
+        return orderDao.findOrder(userId);
+    }
+
+    @Override
+    public List<OrderItem> findOrderItem(String orderId) {
+        return orderItemDao.findOrderItem(orderId);
     }
 }

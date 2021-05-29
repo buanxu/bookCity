@@ -15,6 +15,9 @@ public class Order implements Serializable {
     private Integer status;
     private Integer userId;
 
+    public Order() {
+    }
+
     public Order(String orderId, Date createTime, BigDecimal price, Integer status, Integer userId) {
         this.orderId = orderId;
         this.createTime = createTime;

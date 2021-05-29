@@ -28,32 +28,19 @@
 	<div id="main">
 		<table>
 			<tr>
-				<td>订单编号</td>
-				<td>日期</td>
-				<td>金额</td>
-				<td>状态</td>
-				<td>详情</td>
+				<td>商品名</td>
+				<td>商品数量</td>
+				<td>商品单价</td>
+				<td>商品总金额</td>
 			</tr>
-
-			<%--订单为空--%>
-			<c:if test="${empty requestScope.orders}">
-				<tr>
-					<td colspan="5">当前没有订单，<a href="index.jsp" >先去浏览商品，再创建订单吧</a></td>
-				</tr>
-			</c:if>
 			<%--订单非空--%>
-			<c:if test="${not empty requestScope.orders}">
-				<c:forEach var="order" items="${requestScope.orders}">
+			<c:if test="${not empty requestScope.orderItems}">
+				<c:forEach var="orderItem" items="${requestScope.orderItems}">
 					<tr>
-						<td>${order.orderId}</td>
-						<td width="50px">${order.createTime}</td>
-						<td>${order.price}</td>
-						<c:choose >
-							<c:when test="${order.status==0}"><td>未发货</td></c:when>
-							<c:when test="${order.status==1}"><td>已发货</td></c:when>
-							<c:when test="${order.status==2}"><td>已签收</td></c:when>
-						</c:choose>
-						<td><a href="orderController?action=findOrderItem&orderId=${order.orderId}">查看详情</a></td>
+						<td>${orderItem.name}</td>
+						<td >${orderItem.counts}</td>
+						<td>${orderItem.price}</td>
+						<td>${orderItem.totalPrice}</td>
 					</tr>
 				</c:forEach>
 			</c:if>

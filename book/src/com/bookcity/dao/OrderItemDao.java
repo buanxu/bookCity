@@ -2,6 +2,8 @@ package com.bookcity.dao;
 
 import com.bookcity.entity.OrderItem;
 
+import java.util.List;
+
 public interface OrderItemDao {
 
     /**
@@ -10,4 +12,11 @@ public interface OrderItemDao {
      * @return
      */
     public int save(OrderItem item);
+
+    /**
+     * 查询订单的所偶有订单项，即该订单包含的所有的商品的信息
+     * @param orderId
+     * @return
+     */
+    public List<OrderItem> findOrderItem(String orderId);
 }

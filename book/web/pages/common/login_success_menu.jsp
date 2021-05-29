@@ -11,7 +11,7 @@
 
     <%--用户登陆以后才显示我的订单和注销菜单--%>
     <c:if test="${not empty sessionScope.user}">
-        <a href="pages/order/order.jsp">我的订单</a>
+        <a href="orderController?action=findOrder&userId=${sessionScope.user.id}">我的订单</a>
         <a href="./user?action=logout">注销</a>&nbsp;&nbsp;
     </c:if>
     <a href="./index.jsp">返回</a>

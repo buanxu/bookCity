@@ -18,13 +18,18 @@
 				//刷新整个页面
 				//location.href="${basePath}cartController?action=addItem&id="+bookId;
 
-				alert("当前购物车中的总的商品数:"+${sessionScope.cart.totalCounts});
-				alert("当前购物车中的总的商品数:"+${sessionScope.cartTotalCounts});
+				var className = $("#lastName").attr("class");
 				//用ajax请求向购物车里添加数据，局部更新
-				$.getJSON("${basePath}cartController?","action=ajaxAddItem&id="+bookId,function (data) {
-
+				$.getJSON("${basePath}cartController?","action=ajaxAddItem&id="+bookId+"&className="+className,function (data) {
 					$("#itemCounts").text("您的购物车中有"+data.cartTotalCounts+"件商品");
-					$("#lastName").text(data.lastName);
+					if (className=="isNull"){
+						$("#isNull01").text("您刚刚将");
+						$("#lastName").text(data.lastName);
+						$("#isNull02").text("加入到了购物车");
+					}
+					if (className=="notNull"){
+						$("#lastName").text(data.lastName);
+					}
 				})
 			});
 		});
@@ -44,7 +49,7 @@
 				<%--用户登录了，就显示用户信息--%>
 				<c:if test="${not empty sessionScope.user}">
 					<span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临岳麓书城</span>
-					<a href="pages/order/order.jsp">我的订单</a>
+					<a href="orderController?action=findOrder&userId=${sessionScope.user.id}">我的订单</a>
 					<a href="./user?action=logout">注销</a>&nbsp;&nbsp;
 				</c:if>
 				<a href="pages/cart/cart.jsp">购物车</a>
@@ -66,16 +71,18 @@
 				<div style="text-align: center">
 					<span id="itemCounts" ></span>
 					<div>
-						<span style="color: red" id="lastName">当前购物车为空</span>
+						<span id="isNull01" ></span>
+						<span style="color: red" id="lastName" class="isNull">当前购物车为空</span>
+						<span id="isNull02" ></span>
 					</div>
 				</div>
 			</c:if>
 			<%--购物车非空时的输出信息--%>
 			<c:if test="${not empty sessionScope.cart.items}">
 				<div style="text-align: center">
-					<span id="itemCounts">您的购物车中有${sessionScope.cart.totalCounts}件商品</span>
+					<span id="itemCounts" >您的购物车中有${sessionScope.cart.totalCounts}件商品</span>
 					<div>
-						您刚刚将<span id="lastName" style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+						您刚刚将 <span id="lastName" style="color: red" class="notNull">${sessionScope.lastName}</span> 加入到了购物车中
 					</div>
 				</div>
 			</c:if>

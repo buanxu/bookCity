@@ -2,6 +2,8 @@ package com.bookcity.dao;
 
 import com.bookcity.entity.Order;
 
+import java.util.List;
+
 public interface OrderDao {
 
     /**
@@ -10,4 +12,11 @@ public interface OrderDao {
      * @return
      */
     public int save(Order order);
+
+    /**
+     * 查询用户的订单
+     * @param userId
+     * @return
+     */
+    public List<Order>  findOrder(Integer userId);
 }

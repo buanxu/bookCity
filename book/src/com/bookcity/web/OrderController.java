@@ -1,6 +1,8 @@
 package com.bookcity.web;
 
 import com.bookcity.entity.Cart;
+import com.bookcity.entity.Order;
+import com.bookcity.entity.OrderItem;
 import com.bookcity.entity.User;
 import com.bookcity.service.BookService;
 import com.bookcity.service.OrderService;
@@ -8,12 +10,13 @@ import com.bookcity.service.UserService;
 import com.bookcity.service.impl.BookServiceImpl;
 import com.bookcity.service.impl.OrderServiceImpl;
 import com.bookcity.service.impl.UserServiceImpl;
-import com.bookcity.utils.JdbcUtils;
+import com.bookcity.utils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class OrderController extends BaseServlet {
     private OrderService orderService=new OrderServiceImpl();
@@ -46,5 +49,37 @@ public class OrderController extends BaseServlet {
 
         //结完账重定向到带有订单编号的页面，重定向是为了防止重复提交
         resp.sendRedirect(req.getContextPath()+"/pages/cart/checkout.jsp");
+    }
+
+    /**
+     * 查询订单信息
+     * @param req
+     * @param resp
+     */
+    public void findOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //先获取用户id
+        Integer userId = BeanUtils.parseInt(req.getParameter("userId"),0);
+        //查出用户的所有订单
+        List<Order> orders = orderService.findOrder(userId);
+        //把order放到request域
+        req.setAttribute("orders",orders);
+        //转发到订单页面
+        req.getRequestDispatcher("/pages/order/order.jsp").forward(req, resp);
+    }
+
+    /**
+     * 查询订单项详细信息
+     * @param req
+     * @param resp
+     */
+    public void findOrderItem(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //获取订单id
+        String orderId = req.getParameter("orderId");
+        //查询订单中的所有订单项
+        List<OrderItem> orderItems = orderService.findOrderItem(orderId);
+        //把订单项存进request域
+        req.setAttribute("orderItems",orderItems );
+        //转发到订单项页面
+        req.getRequestDispatcher("/pages/order/orderItem.jsp").forward(req, resp);
     }
 }
