@@ -5,33 +5,46 @@
 <head>
 <meta charset="UTF-8">
 <title>我的订单</title>
+	<style type="text/css">
+		h1 {
+			text-align: center;
+			margin-top: 200px;
+		}
+	</style>
 	<%--	静态包含base标签、css样式、jQuery文件--%>
 	<%@include file="/pages/common/head.jsp"%>
-<style type="text/css">
-	h1 {
-		text-align: center;
-		margin-top: 200px;
-	}
-</style>
+
+
+	<script type="text/javascript">
+		$(function () {
+			$("a.receive").click(function () {
+				var orderId=$(this).parent().parent().find("td:first").text();
+				//确认签收？
+				return confirm("确认签收编号为【"+orderId+"】的订单？");
+			});
+		});
+	</script>
 </head>
 <body>
-	
-	<div id="header">
+<br/>
+<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png" >
 			<span class="wel_word">我的订单</span>
-
 
 		<%--			静态包含登录成功后的菜单页面--%>
 		<%@include file="/pages/common/login_success_menu.jsp"%>
 	</div>
 	
 	<div id="main">
-		<table>
+		<p align="center" style="font-size: x-large;font-family: 微软雅黑">用户【${sessionScope.user.username}】的全部订单</p>
+
+		<table style="margin-top: 50px">
 			<tr>
 				<td>订单编号</td>
 				<td>日期</td>
 				<td>金额</td>
 				<td>状态</td>
+				<td>签收</td>
 				<td>详情</td>
 			</tr>
 
@@ -51,6 +64,11 @@
 						<c:choose >
 							<c:when test="${order.status==0}"><td>未发货</td></c:when>
 							<c:when test="${order.status==1}"><td>已发货</td></c:when>
+							<c:when test="${order.status==2}"><td>已签收</td></c:when>
+						</c:choose>
+						<c:choose >
+							<c:when test="${order.status==0}"><td>无法签收</td></c:when>
+							<c:when test="${order.status==1}"><td><a href="orderController?action=updateOrderStatus&orderId=${order.orderId}&userId=${order.userId}&operate=receive"  class="receive" style="text-decoration:none">确认签收</a></td></c:when>
 							<c:when test="${order.status==2}"><td>已签收</td></c:when>
 						</c:choose>
 						<td><a href="orderController?action=findOrderItem&orderId=${order.orderId}">查看详情</a></td>

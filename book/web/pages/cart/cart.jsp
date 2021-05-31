@@ -43,18 +43,16 @@
 	</script>
 </head>
 <body >
-	
+	<br/>
 	<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png" >
 			<span class="wel_word">购物车</span>
-
 
 		<%--			静态包含登录成功后的菜单页面--%>
 		<%@include file="/pages/common/login_success_menu.jsp"%>
 	</div>
 	
 	<div id="main">
-	
 		<table>
 			<tr>
 				<td>商品名称</td>

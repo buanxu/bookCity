@@ -87,9 +87,9 @@
 				var codeText=$("#code").val();
 
 				//去掉验证码首尾空格
-				alert("["+codeText+"]");
+				// alert("["+codeText+"]");
 				codeText=$.trim(codeText);
-				alert("["+codeText+"]");
+				// alert("["+codeText+"]");
 				if(codeText==null ||codeText==""){
 					//4.给出提示信息
 					$("span.errorMsg").text("验证码不能为空！");
@@ -112,6 +112,7 @@
 </style>
 </head>
 <body>
+<br/>
 		<div id="login_header">
 			<img class="logo_img" alt="" src="./static/img/logo.png" >
 		</div>

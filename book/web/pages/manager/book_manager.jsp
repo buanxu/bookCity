@@ -13,6 +13,7 @@
 		$(function () {
 			//给所有class属性为deleteClass的a标签绑定单击事件，用于删除的确认操作提示
 			$("a.deleteClass").click(function () {
+				alert($(this).parent().parent().find("td:first").text());
 				/*
 				 *confirm() 是确认提示框函数，参数就是它的提示内容
 				 * 它有两个按钮，分别是确认、取消
@@ -23,16 +24,16 @@
 
 				//在事件的function函数中，有一个this对象，这个this对象是当前正在响应事件的dom对象
 				return confirm("确定要删除【"+$(this).parent().parent().find("td:first").text()+"】？")
-			})
+			});
 		});
 	</script>
 </head>
 <body>
-	
+<br/>
 	<div id="header">
-			<img class="logo_img" alt="" src="./static/img/logo.png" >
+			<img class="logo_img" alt="" src="./static/img/logo.png"/>
 			<span class="wel_word">图书管理系统</span>
-		<%--			静态包含  manager模块管理菜单--%>
+		<%--静态包含  manager模块管理菜单--%>
 		<%@include file="/pages/common/manager_menu.jsp"%>
 	</div>
 	
@@ -75,7 +76,7 @@
 		</table>
 		<br/>
 		<br/>
-
+		<br/>
 		<%--开始分页，静态包含分页条--%>
 		<%@include file="/pages/common/page_bar.jsp"%>
 	</div>

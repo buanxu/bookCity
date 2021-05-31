@@ -3,11 +3,11 @@ package com.bookcity.entity;
 import java.util.List;
 
 /**
- * Page是分页的模型对象
+ * Page是图书分页的模型对象
  * @param <T> 是具体的模块的JavaBean类型
  */
 public class Page<T> {
-    public static final Integer PAGE_SIZE=4;
+    public static final Integer PAGE_SIZE=5;
 
     //当前页码
     private Integer pageNo;

@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * 订单类，包含了订单信息
- */
-public class Order implements Serializable {
+public class UserOrder implements Serializable {
+
     //设置能表示订单状态的三个常量
     public static final Integer NOT_SEND_OUT =0;
     public static final Integer SEND_OUT=1;
     public static final Integer RECEIVE=2;
 
+    //用户id
+    private Integer id;
+    private String username;
 
+    //用户订单信息
     private String orderId;
     private Date createTime;
     private BigDecimal price;
@@ -21,15 +23,33 @@ public class Order implements Serializable {
     private Integer status;
     private Integer userId;
 
-    public Order() {
+    public UserOrder() {
     }
 
-    public Order(String orderId, Date createTime, BigDecimal price, Integer status, Integer userId) {
+    public UserOrder(Integer id, String username, String orderId, Date createTime, BigDecimal price, Integer status, Integer userId) {
+        this.id = id;
+        this.username = username;
         this.orderId = orderId;
         this.createTime = createTime;
         this.price = price;
         this.status = status;
         this.userId = userId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getOrderId() {
@@ -74,8 +94,10 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "orderId='" + orderId + '\'' +
+        return "UserOrder{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", orderId='" + orderId + '\'' +
                 ", createTime=" + createTime +
                 ", price=" + price +
                 ", status=" + status +

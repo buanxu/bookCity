@@ -16,6 +16,9 @@ import static org.junit.Assert.*;
 public class OrderServiceTest {
     private OrderService orderService = new OrderServiceImpl();
 
+    /**
+     * 由于filter加了事务，所以只有通过浏览器添加数据的时候才能成功保存在数据库里，在测试里没有触发事务，所以添加数据不会成功
+     */
     @Test
     public void createOrder() {
         Cart cart = new Cart();

@@ -13,7 +13,7 @@
 </head>
 <body>
     <%--抽取出重复的分页条代码--%>
-    <div id="page_nav">
+    <div id="page_nav" style="margin-bottom: ">
     <%--页码大于1才显示--%>
     <c:if test="${requestScope.page.pageNo>1}">
         <a href="${requestScope.page.url}&pageNo=1">首页</a>

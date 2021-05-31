@@ -17,9 +17,11 @@ public class JdbcUtils {
         dataSource=new ComboPooledDataSource();
         try {
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/book");
+            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=UTF-8");
+//            dataSource.setJdbcUrl("jdbc:mysql://81.70.96.70:3306/book?useUnicode=true&characterEncoding=UTF-8");
             dataSource.setUser("root");
             dataSource.setPassword("root");
+//            dataSource.setPassword("mgl222377");
             dataSource.setInitialPoolSize(5);
             dataSource.setMaxPoolSize(10);
         } catch (PropertyVetoException e) {
@@ -73,6 +75,7 @@ public class JdbcUtils {
                 }
             }
         }
+        //把连接和线程解绑，把连接放回到连接池里
         // 一定要执行remove操作，否则就会出错。（因为Tomcat服务器底层使用了线程池技术）
         threadLocal.remove();
     }
@@ -97,6 +100,7 @@ public class JdbcUtils {
                 }
             }
         }
+        //把连接和线程解绑，把连接放回到连接池里
         // 一定要执行remove操作，否则就会出错。（因为Tomcat服务器底层使用了线程池技术）
         threadLocal.remove();
     }

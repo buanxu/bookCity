@@ -18,6 +18,7 @@
 </style>
 </head>
 <body>
+<br/>
 		<div id="header">
 				<img class="logo_img" alt="" src="/static/img/logo.png" >
 				<span class="wel_word"></span>
@@ -29,7 +30,7 @@
 		
 		<div id="main">
 		
-			<h1>注册成功! <a href="../../index.jsp">转到主页</a></h1>
+			<h1>注册成功! <a href="index.jsp">转到主页</a></h1>
 	
 		</div>
 

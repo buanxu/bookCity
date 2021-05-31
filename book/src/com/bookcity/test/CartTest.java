@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 
 public class CartTest {
 
+    /**
+     * 由于filter加了事务，所以只有通过浏览器添加数据的时候才能成功保存在数据库里，在测试里没有触发事务，所以添加数据不会成功
+     */
     @Test
     public void addItem() {
         Cart cart=new Cart();
@@ -30,6 +33,9 @@ public class CartTest {
         System.out.println(cart);
     }
 
+    /**
+     * 由于filter加了事务，所以只有通过浏览器添加数据的时候才能成功保存在数据库里，在测试里没有触发事务，所以添加数据不会成功
+     */
     @Test
     public void updateItem() {
         Cart cart=new Cart();
@@ -39,6 +45,7 @@ public class CartTest {
         cart.updateItem(1, 1);
         System.out.println(cart);
     }
+
 
     @Test
     public void clearCart() {

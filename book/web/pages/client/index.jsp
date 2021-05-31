@@ -57,8 +57,8 @@
 			</div>
 	</div>
 	<div id="main">
-		<div id="book">
-			<div class="book_cond">
+		<div id="book" >
+			<div class="book_cond" >
 				<form action="client/clientController" method="post">
 					<input type="hidden" name="action" value="pageByPrice"/>
 					价格：<input id="min" type="text" name="min" value="${param.min}"> 元 —
@@ -92,7 +92,7 @@
 					<div class="img_div">
 						<img class="book_img" alt="" src="static/img/default.jpg" />
 					</div>
-					<div class="book_info">
+					<div class="book_info" >
 						<div class="book_name">
 							<span class="sp1">书名:</span>
 							<span class="sp2">${book.name}</span>
@@ -109,11 +109,12 @@
 							<span class="sp1">销量:</span>
 							<span class="sp2">${book.sales}</span>
 						</div>
-						<div class="book_amount">
-							<span class="sp1">库存:</span>
-							<span class="sp2">${book.stock}</span>
+						<div class="book_amount" align="center">
+							<span class="sp1" >库存:</span>
+							<span class="sp2" >${book.stock}</span>
 						</div>
 						<div  class="book_add">
+							<br/>
 							<button bookId="${book.id}" class="addToCart">加入购物车</button>
 						</div>
 					</div>

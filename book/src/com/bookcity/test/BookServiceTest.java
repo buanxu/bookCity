@@ -17,6 +17,9 @@ public class BookServiceTest {
 
     private BookService bookService=new BookServiceImpl();
 
+    /**
+     * 由于filter加了事务，所以只有通过浏览器添加数据的时候才能成功保存在数据库里，在测试里没有触发事务，所以添加数据不会成功
+     */
     @Test
     public void saveBook() {
         Book book=new Book("白夜行","东野圭吾",new BigDecimal(299.9),10000,9999,"D:/book/");
@@ -28,6 +31,9 @@ public class BookServiceTest {
         bookService.deleteBook(31);
     }
 
+    /**
+     * 由于filter加了事务，所以只有通过浏览器添加数据的时候才能成功保存在数据库里，在测试里没有触发事务，所以添加数据不会成功
+     */
     @Test
     public void updateBook() {
         Book book=new Book(32,"嫌疑人X的献身","东野圭吾",new BigDecimal(299.9),100000,99999,"D:/book/");
