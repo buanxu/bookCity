@@ -53,7 +53,11 @@
 					<a href="./user?action=logout">注销</a>&nbsp;&nbsp;
 				</c:if>
 				<a href="pages/cart/cart.jsp">购物车</a>
-				<a href="pages/manager/manager.jsp">后台管理</a>
+
+				<%--后台管理模块只对管理员admin开放--%>
+				<c:if test="${sessionScope.user.username=='admin'&&sessionScope.user.id==1}">
+					<a href="pages/manager/manager.jsp">后台管理</a>
+				</c:if>
 			</div>
 	</div>
 	<div id="main">

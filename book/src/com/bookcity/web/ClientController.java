@@ -31,7 +31,7 @@ public class ClientController extends BaseServlet {
 
         //获取前台传过来的参数，把前台传过来的数字字符串转成int类型
         int pageNo= BeanUtils.parseInt(req.getParameter("pageNo"),1);
-        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
         //调用service获取Page对象
         Page<Book> page = bookService.page(pageNo, pageSize);
 
@@ -54,7 +54,7 @@ public class ClientController extends BaseServlet {
 
         //获取前台传过来的参数，把前台传过来的数字字符串转成int类型
         int pageNo= BeanUtils.parseInt(req.getParameter("pageNo"),1);
-        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
         int min=BeanUtils.parseInt(req.getParameter("min"), 0);
         int max=BeanUtils.parseInt(req.getParameter("max"), Integer.MAX_VALUE);
         System.out.println("min："+min);

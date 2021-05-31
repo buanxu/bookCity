@@ -12,8 +12,10 @@
     <title>Title</title>
 </head>
 <body>
+    <%--此分页是对UserOrder进行分页的--%>
+
     <%--抽取出重复的分页条代码--%>
-    <div id="page_nav" style="margin-bottom: ">
+    <div id="page_nav" >
     <%--页码大于1才显示--%>
     <c:if test="${requestScope.page.pageNo>1}">
         <a href="${requestScope.page.url}&pageNo=1">首页</a>

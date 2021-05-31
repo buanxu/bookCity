@@ -89,4 +89,37 @@ public class OrderServiceImpl implements OrderService {
             orderDao.updateOrderStatus(Order.RECEIVE,orderId);
         }
     }
+
+    /**
+     * 处理分页相关的的业务，返回分页模型
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Page<UserOrder> page(int pageNo, int pageSize) {
+        Page<UserOrder> page=new Page<UserOrder>();
+
+        //设置当前页码
+        page.setPageNo(pageNo);
+        //设置每页显示的数量
+        page.setPageSize(pageSize);
+
+        //设置总的记录数
+        int recordsCounts=orderDao.findTotalRecords();
+        page.setPageTotalCounts(recordsCounts);
+
+        //设置总的页码数
+        int pageCounts=recordsCounts/pageSize;
+        if (recordsCounts%pageSize >0){
+            pageCounts++;
+        }
+        page.setPageTotal(pageCounts);
+
+        //设置每页显示的数据
+        List<UserOrder> userOrders = orderDao.findPageList((pageNo - 1) * pageSize, pageSize);
+        page.setItems(userOrders);
+
+        return page;
+    }
 }

@@ -7,7 +7,10 @@ import java.util.List;
  * @param <T> 是具体的模块的JavaBean类型
  */
 public class Page<T> {
-    public static final Integer PAGE_SIZE=5;
+    //图书分页时设置每页显示几条数据
+    public static final Integer BOOK_PAGE_SIZE=5;
+    //后台订单分页时设置每页显示几条数据
+    public static final Integer ORDER_PAGE_SIZE=5;
 
     //当前页码
     private Integer pageNo;

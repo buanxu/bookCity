@@ -1,5 +1,6 @@
 package com.bookcity.dao;
 
+import com.bookcity.entity.Book;
 import com.bookcity.entity.Order;
 import com.bookcity.entity.UserOrder;
 
@@ -40,4 +41,18 @@ public interface OrderDao {
      * @param status
      */
     public int updateOrderStatus(Integer status,String orderId);
+
+    /**
+     * 查询总的记录数
+     * @return
+     */
+    public Integer findTotalRecords();
+
+    /**
+     * 分页查询
+     * @param beginIndex 起始索引
+     * @param pageSize  每页显示的记录数
+     * @return
+     */
+    public List<UserOrder> findPageList(int beginIndex, int pageSize );
 }

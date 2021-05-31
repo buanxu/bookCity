@@ -1,6 +1,7 @@
 package com.bookcity.dao.impl;
 
 import com.bookcity.dao.OrderDao;
+import com.bookcity.entity.Book;
 import com.bookcity.entity.Order;
 import com.bookcity.entity.UserOrder;
 
@@ -21,7 +22,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 
     @Override
     public UserOrder findOneUserOrder(String orderId) {
-        String sql="select * from t_order where orderId=?";
+        String sql="SELECT uo.* FROM (SELECT u.id,u.username,o.* FROM  t_order o LEFT JOIN t_user u ON u.id=o.userId ) uo WHERE uo.orderId=?";
         return findOne(UserOrder.class, sql, orderId);
     }
 
@@ -40,5 +41,19 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     public int updateOrderStatus(Integer status,String orderId) {
         String sql="update t_order set status=? where orderId=?";
         return update(sql, status,orderId);
+    }
+
+    @Override
+    public Integer findTotalRecords() {
+        String sql="SELECT COUNT(orderId) FROM t_order";
+        Number number=(Number) findSingleValue(sql);
+        return number.intValue();
+    }
+
+    @Override
+    public List<UserOrder> findPageList(int beginIndex, int pageSize) {
+        String sql="SELECT uo.* FROM (SELECT u.id,u.username,o.* FROM  t_order o LEFT JOIN t_user u ON u.id=o.userId) uo LIMIT ?,?";
+        List<UserOrder> userOrders = findList(UserOrder.class, sql, beginIndex, pageSize);
+        return userOrders;
     }
 }

@@ -28,7 +28,7 @@ public class BookController extends BaseServlet {
         String page1=req.getParameter("pageNo");
         String page2=req.getParameter("pageSize");
         int pageNo=BeanUtils.parseInt(req.getParameter("pageNo"),1);
-        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
         //调用service获取Page对象
         Page<Book> page = bookService.page(pageNo, pageSize);
 

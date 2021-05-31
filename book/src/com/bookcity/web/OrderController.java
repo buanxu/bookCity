@@ -22,6 +22,31 @@ public class OrderController extends BaseServlet {
     private UserService userService=new UserServiceImpl();
 
     /**
+     * 对后台所有订单进行分页
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //获取前台传过来的参数，把前台传过来的数字字符串转成int类型
+        int pageNo=BeanUtils.parseInt(req.getParameter("pageNo"),1);
+        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.ORDER_PAGE_SIZE);
+        //调用service获取Page对象
+        Page<UserOrder> page = orderService.page(pageNo, pageSize);
+
+        //设置分页条请求的url
+        page.setUrl("orderController?action=page");
+
+        //把page存到request域
+        req.setAttribute("page", page);
+        req.setAttribute("flag", "backstageOrdersPage");
+        //转发到list页面
+        req.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(req, resp);
+    }
+
+
+    /**
      * 结账时创建订单
      * @param req
      * @param resp
@@ -74,8 +99,12 @@ public class OrderController extends BaseServlet {
     public void findUserOrdersByUsername(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取用户名
         String username = req.getParameter("username");
+        //查询该用户的所有订单
         List<UserOrder> userOrders = orderService.findUserOrders(username);
         req.setAttribute("userOrders",userOrders);
+        //h回显用户名
+        req.setAttribute("username", username);
+        req.setAttribute("flag", "notBackstageOrdersPage");
         req.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(req, resp);
     }
 
@@ -95,6 +124,9 @@ public class OrderController extends BaseServlet {
         userOrders.add(userOrder);
         //将userOrders存入request域
         req.setAttribute("userOrders",userOrders);
+        //回显订单
+        req.setAttribute("orderId",orderId );
+        req.setAttribute("flag", "notBackstageOrdersPage");
         //转发到后台的订单管理页面
         req.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(req, resp);
     }

@@ -1,9 +1,6 @@
 package com.bookcity.service;
 
-import com.bookcity.entity.Cart;
-import com.bookcity.entity.Order;
-import com.bookcity.entity.OrderItem;
-import com.bookcity.entity.UserOrder;
+import com.bookcity.entity.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,4 +49,13 @@ public interface OrderService {
      * @param operate
      */
     public void updateOrderStatus(String orderId,String operate);
+
+
+    /**
+     * 对后台订单进行分页
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public Page<UserOrder> page(int pageNo, int pageSize);
 }
