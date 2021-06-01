@@ -17,11 +17,11 @@ public class JdbcUtils {
         dataSource=new ComboPooledDataSource();
         try {
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=UTF-8");
-//            dataSource.setJdbcUrl("jdbc:mysql://81.70.96.70:3306/book?useUnicode=true&characterEncoding=UTF-8");
+//            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=UTF-8");
+            dataSource.setJdbcUrl("jdbc:mysql://81.70.96.70:3306/book?useUnicode=true&characterEncoding=UTF-8");
             dataSource.setUser("root");
-            dataSource.setPassword("root");
-//            dataSource.setPassword("mgl222377");
+//            dataSource.setPassword("root");
+            dataSource.setPassword("mgl222377");
             dataSource.setInitialPoolSize(5);
             dataSource.setMaxPoolSize(10);
         } catch (PropertyVetoException e) {
