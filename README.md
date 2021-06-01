@@ -8,7 +8,7 @@
 
 #### 软件架构
 本项目主要用到的技术：
-    前端：html、css、jequery、ajax、json
+    前端：页面用的jsp、css、jequery、ajax、json
     后端：tomcat、反射、servlet、filter的相关技术、jsp
     数据库：mysql(加了事务）、DButils、c3p0连接池
-    本项目部署到了腾讯的服务器上，地址：http://81.70.96.70:8080/bookCity/
+    地址：http://81.70.96.70:8080/bookCity/
