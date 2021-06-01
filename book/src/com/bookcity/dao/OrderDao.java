@@ -42,6 +42,14 @@ public interface OrderDao {
      */
     public int updateOrderStatus(Integer status,String orderId);
 
+
+    /**
+     * 查询订单状态
+     * @param orderId
+     * @return
+     */
+    public Integer findOrderStatus(String orderId);
+
     /**
      * 查询总的记录数
      * @return

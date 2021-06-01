@@ -44,6 +44,13 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     }
 
     @Override
+    public Integer findOrderStatus(String orderId) {
+        String sql="SELECT STATUS FROM t_order WHERE orderId=?";
+        Integer status=(Integer) findSingleValue(sql, orderId);
+        return status;
+    }
+
+    @Override
     public Integer findTotalRecords() {
         String sql="SELECT COUNT(orderId) FROM t_order";
         Number number=(Number) findSingleValue(sql);

@@ -14,13 +14,20 @@
 	<%--	静态包含base标签、css样式、jQuery文件--%>
 	<%@include file="/pages/common/head.jsp"%>
 
-
 	<script type="text/javascript">
 		$(function () {
+			//当用户签收后，修改订单状态为已签收
 			$("a.receive").click(function () {
-				var orderId=$(this).parent().parent().find("td:first").text();
-				//确认签收？
-				return confirm("确认签收编号为【"+orderId+"】的订单？");
+				//获取当前要修改状态的订单的id
+				var orderId = $(this).parent().parent().find("td").eq(0).text();
+				//确认修改订单？
+				if (confirm("确认签收编号为【"+orderId+"】的订单？")){
+					//确认修改以后再发送ajax请求
+					$.getJSON("${basePath}orderController","action=updateOrderStatus&operate=receive&orderId="+orderId,function (data) {
+					});
+					$(this).parent().parent().find("td").eq(3).text("已签收");
+					$(this).parent().parent().find("td").eq(4).text("已签收");
+				}
 			});
 		});
 	</script>
@@ -68,7 +75,8 @@
 						</c:choose>
 						<c:choose >
 							<c:when test="${order.status==0}"><td>无法签收</td></c:when>
-							<c:when test="${order.status==1}"><td><a href="orderController?action=updateOrderStatus&orderId=${order.orderId}&userId=${order.userId}&operate=receive"  class="receive" style="text-decoration:none">确认签收</a></td></c:when>
+							<c:when test="${order.status==1}"><td><a href="javascript:"  class="receive" style="text-decoration:none">确认签收</a></td></c:when>
+<%--							<c:when test="${order.status==1}"><td><a href="orderController?action=updateOrderStatus&orderId=${order.orderId}&userId=${order.userId}&operate=receive"  class="receive" style="text-decoration:none">确认签收</a></td></c:when>--%>
 							<c:when test="${order.status==2}"><td>已签收</td></c:when>
 						</c:choose>
 						<td><a href="orderController?action=findOrderItem&orderId=${order.orderId}">查看详情</a></td>

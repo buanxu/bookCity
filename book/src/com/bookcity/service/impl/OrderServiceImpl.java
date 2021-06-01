@@ -72,6 +72,12 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.findUserOrder(username);
     }
 
+    @Override
+    public Integer findOrderStatus(String orderId) {
+
+        return orderDao.findOrderStatus(orderId);
+    }
+
     /**
      * 修改订单状态
      * @param orderId

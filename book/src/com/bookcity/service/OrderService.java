@@ -42,6 +42,12 @@ public interface OrderService {
      */
     public List<UserOrder> findUserOrders(String username);
 
+    /**
+     * 查询订单状态
+     * @param orderId
+     * @return
+     */
+    public Integer findOrderStatus(String orderId);
 
     /**
      * 在发货后或签收后修改订单

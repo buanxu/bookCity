@@ -8,13 +8,16 @@ import com.bookcity.service.impl.BookServiceImpl;
 import com.bookcity.service.impl.OrderServiceImpl;
 import com.bookcity.service.impl.UserServiceImpl;
 import com.bookcity.utils.BeanUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderController extends BaseServlet {
     private OrderService orderService=new OrderServiceImpl();
@@ -75,7 +78,7 @@ public class OrderController extends BaseServlet {
     }
 
     /**
-     * 查询订单信息
+     * 当前登录的用户查询自己订单信息
      * @param req
      * @param resp
      */
@@ -86,6 +89,7 @@ public class OrderController extends BaseServlet {
         List<Order> orders = orderService.findOrder(userId);
         //把order放到request域
         req.setAttribute("orders",orders);
+
         //转发到订单页面
         req.getRequestDispatcher("/pages/order/order.jsp").forward(req, resp);
     }
@@ -158,28 +162,31 @@ public class OrderController extends BaseServlet {
         req.getRequestDispatcher("/pages/order/orderItem.jsp").forward(req, resp);
     }
 
+
     /**
-     *发货后或签收订单后修改订单状态
+     * ajax实现
+     *管理员发货后或用户签收订单后修改订单状态
      * @param req
      * @param resp
      */
-    public void updateOrderStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //先清除之前的订单
-        req.removeAttribute("orders");
-        //获取订单所属的用户的id
-        Integer userId = BeanUtils.parseInt(req.getParameter("userId"), 0);
+        public void updateOrderStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取订单编号
         String orderId = req.getParameter("orderId");
         //获取订单操作，是签收了还是发货了
         String operate = req.getParameter("operate");
+        System.out.println(orderId);
+        System.out.println(operate);
         //修改订单状态
         orderService.updateOrderStatus(orderId, operate);
-        //再查询用户的所有订单其中包含了已修改了订单状态的订单
-        List<Order> orders = orderService.findOrder(userId);
-        //把orders放到request域
-        req.setAttribute("orders",orders);
-        //转发到订单页面
-        req.getRequestDispatcher("/pages/order/order_manager.jsp").forward(req, resp);
 
-    }
+        //然后再查询该订单的状态，并把状态通过ajax返回前台
+        Integer orderStatus = orderService.findOrderStatus(orderId);
+        Map<String,Object> map=new HashMap<>();
+        map.put("orderStatus",orderStatus);
+
+        Gson gson=new Gson();
+        String json = gson.toJson(map);
+        resp.getWriter().print(json);
+        }
+
 }
