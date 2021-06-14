@@ -83,6 +83,5 @@ public abstract class BaseDao {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
     }
 }

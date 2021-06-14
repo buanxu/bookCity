@@ -18,9 +18,15 @@
 				if (confirm("确定给编号为【"+orderId+"】的订单发货？")){
 					//确认修改以后再发送ajax请求
 					$.getJSON("${basePath}orderController","action=updateOrderStatus&operate=sendOut&orderId="+orderId,function (data) {
+						//订单状态是1，表示已发货，则修改订单状态
+						if (data.orderStatus==1){
+							//获取当前要修改状态的订单的id
+							var orderId = data.orderId;
+							var orderId2 = data.orderId+"111";
+							$("#"+orderId+"").text("已发货");
+							$("#"+orderId2+"").text("待签收");
+						}
 					});
-					$(this).parent().parent().find("td").eq(4).text("已发货");
-					$(this).parent().parent().find("td").eq(5).text("待签收");
 				}
 			});
 		});
@@ -78,12 +84,12 @@
 					<td>${userOrder.createTime}</td>
 					<td>${userOrder.price}</td>
 					<c:choose>
-						<c:when test="${userOrder.status==0}"><td>未发货</td></c:when>
-						<c:when test="${userOrder.status==1}"><td>已发货</td></c:when>
-						<c:when test="${userOrder.status==2}"><td>已签收</td></c:when>
+						<c:when test="${userOrder.status==0}"><td id="${userOrder.orderId}111">未发货</td></c:when>
+						<c:when test="${userOrder.status==1}"><td >已发货</td></c:when>
+						<c:when test="${userOrder.status==2}"><td >已签收</td></c:when>
 					</c:choose>
 					<c:choose>
-						<c:when test="${userOrder.status==0}"><td><a href="javascript:"  class="sendOut" style="text-decoration:none">点击发货</a></td></c:when>
+						<c:when test="${userOrder.status==0}"><td><a href="javascript:" id="${userOrder.orderId}" class="sendOut" style="text-decoration:none">点击发货</a></td></c:when>
 						<c:when test="${userOrder.status==1}"><td>待签收</td></c:when>
 						<c:when test="${userOrder.status==2}"><td>已签收</td></c:when>
 					</c:choose>

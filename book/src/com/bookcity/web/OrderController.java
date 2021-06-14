@@ -174,8 +174,6 @@ public class OrderController extends BaseServlet {
         String orderId = req.getParameter("orderId");
         //获取订单操作，是签收了还是发货了
         String operate = req.getParameter("operate");
-        System.out.println(orderId);
-        System.out.println(operate);
         //修改订单状态
         orderService.updateOrderStatus(orderId, operate);
 
@@ -183,6 +181,7 @@ public class OrderController extends BaseServlet {
         Integer orderStatus = orderService.findOrderStatus(orderId);
         Map<String,Object> map=new HashMap<>();
         map.put("orderStatus",orderStatus);
+        map.put("orderId", orderId);
 
         Gson gson=new Gson();
         String json = gson.toJson(map);

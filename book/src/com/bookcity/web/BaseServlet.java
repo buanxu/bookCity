@@ -26,6 +26,8 @@ public abstract class BaseServlet extends HttpServlet {
         String action=req.getParameter("action");
         //获取到要调用的方法名来反射对象调用相应方法
         try {
+            System.out.println(this);
+            System.out.println(this.getClass());
             Method method=this.getClass().getDeclaredMethod(action, HttpServletRequest.class,HttpServletResponse.class);
             method.invoke(this, req,resp);
         } catch (Exception e) {
