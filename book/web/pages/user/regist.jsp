@@ -14,6 +14,9 @@
 			//检查用户名是否可用(是否已存在)
 			$("#username").blur(function () {
 				var username=this.value;
+				if (username==''){
+					$("span.errorMsg").text("用户名不能为空！");
+				}
 				//通过ajax向后台请求
 				$.getJSON("${basePath}user","action=ajaxExistUsername&username="+username,function (data) {
 					//传回来false表示用户名不存在，true表示已存在
@@ -30,7 +33,7 @@
 				//在事件响应的function函数中有一个this对象，它是当前正在响应事件的dom对象，即img标签对象
 				//src是img的属性可读可写，在重新赋值后会重新发出请求
 				//加时间戳是为了避免由于浏览器缓存的原因而导致的图片不可刷新
-			this.src="${basepath}kaptcha.jsp?med="+new Date();
+				this.src="${basepath}kaptcha.jsp?med="+new Date();
 			});
 
 			$("#sub_btn").click(function () {

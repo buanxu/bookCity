@@ -55,7 +55,7 @@ div{
 }
 
 .b_list{
-	height:320px;
+	height:350px;
 	width: 242px;
 	margin: 17px;
 	float: left;
@@ -78,13 +78,13 @@ div{
 }
 
 .img_div{
-	height: 150px;
+	height: 180px;
 	text-align: center;
 }
 
 .book_img {
-	height:150px;
-	width:150px;
+	height:190px;
+	width:160px;
 }
 
 .book_info {
@@ -138,6 +138,7 @@ div{
 	height:475px;
 	background-color: #39987c;
 }
+
 
 .login_form{
 	height:310px;

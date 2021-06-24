@@ -11,6 +11,26 @@
 
 	<script type="text/javascript">
 		$(function () {
+			//鼠标经过图片放大该图片
+			$("img.book_img").mouseover(function () {
+				$(this).css("height","350px");
+				$(this).css("width","240");
+
+				//$(this).parent().parent().find("div").eq(1).css("visibility","hidden");
+				//$(this).parent().parent().find("div").eq(2).children().css("visibility","hidden");
+				$(this).parent().parent().find("div").eq(1).hide();
+				$(this).parent().parent().find("div").eq(2).children().hide();
+			});
+			$("img.book_img").mouseout(function () {
+				$(this).css("height","190px");
+				$(this).css("width","160px");
+
+				//$(this).parent().parent().find("div").eq(1).css("visibility","visible");
+				//$(this).parent().parent().find("div").eq(2).children().css("visibility","visible");
+				$(this).parent().parent().find("div").eq(1).show();
+				$(this).parent().parent().find("div").eq(2).children().show();
+			});
+
 			//给加入购物车按钮绑定单击事件，请求后台的cartController
 			$("button.addToCart").click(function () {
 				//$(this)是把 dom对象转换成jquery对象，然后获取对象的bookId属性的值
@@ -35,9 +55,8 @@
 		});
 	</script>
 </head>
-<body>
-	<br/>
-	<div id="header">
+<body style="background-color: darkseagreen">
+	<div id="header" >
 			<img class="logo_img" alt="" src="static/img/logo.png" >
 			<span class="wel_word">网上书城</span>
 			<div>
@@ -60,7 +79,7 @@
 				</c:if>
 			</div>
 	</div>
-	<div id="main">
+	<div id="main" style="background-color: #39987c">
 		<div id="book" >
 			<div class="book_cond" >
 				<form action="client/clientController" method="post">
@@ -94,7 +113,8 @@
 			<c:forEach var="book" items="${requestScope.page.items}">
 				<div class="b_list">
 					<div class="img_div">
-						<img class="book_img" alt="" src="static/img/default.jpg" />
+<%--						<img class="book_img" alt="" src="static/img/default.jpg" />--%>
+						<img class="book_img" alt="" src="${book.img_path}" />
 					</div>
 					<div class="book_info" >
 						<div class="book_name">
@@ -109,7 +129,7 @@
 							<span class="sp1">价格:</span>
 							<span class="sp2">${book.price}</span>
 						</div>
-						<div class="book_sales">
+						<div  class="book_sales">
 							<span class="sp1">销量:</span>
 							<span class="sp2">${book.sales}</span>
 						</div>
@@ -129,7 +149,6 @@
 		<%--开始分页，静态包含分页条--%>
 		<%@include file="/pages/common/page_bar.jsp"%>
 	</div>
-
 <%--	静态包含页脚--%>
 	<%@include file="/pages/common/footer.jsp"%>>
 </body>
