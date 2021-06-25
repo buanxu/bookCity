@@ -1,12 +1,11 @@
 package com.bookcity.utils;
 
-import com.bookcity.entity.User;
+import org.apache.commons.beanutils.BeanUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-public class BeanUtils {
+public class Beanutils {
 
     /**
      * 把请求参数注入到bean中
@@ -17,7 +16,7 @@ public class BeanUtils {
      */
     public static <T> T copyParamsToBean(T bean,Map params){
         try {
-            org.apache.commons.beanutils.BeanUtils.populate(bean,params);
+            BeanUtils.populate(bean,params);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

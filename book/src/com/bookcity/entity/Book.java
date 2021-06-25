@@ -91,9 +91,7 @@ public class Book {
     }
 
     public void setImg_path(String img_path) {
-        if (img_path !=null && img_path!=""){
-            this.img_path = img_path;
-        }
+        this.img_path=img_path;
     }
 
     @Override

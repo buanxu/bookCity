@@ -18,6 +18,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public void uploadCover() {
+
+    }
+
+    @Override
     public int deleteBook(Integer id) {
         return bookDao.deleteBook(id);
     }

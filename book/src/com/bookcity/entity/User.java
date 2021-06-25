@@ -34,6 +34,7 @@ public class User implements Serializable {
     }
 
     public void setUsername(String username) {
+        System.out.println(username);
         this.username = username;
     }
 

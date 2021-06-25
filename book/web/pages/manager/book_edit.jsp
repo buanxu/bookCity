@@ -28,21 +28,21 @@
 			<span class="wel_word">编辑图书</span>
 
 <%--			静态包含  manager模块管理菜单--%>
-			<%@include file="/pages/common/manager_menu.jsp"%>>
+			<%@include file="/pages/common/manager_menu.jsp"%>
 		</div>
 		
 		<div id="main">
 			<br/>
 			<c:if test="${param.id==null}"><p style="font-size: x-large" align="center">添加图书信息</p></c:if>
 			<c:if test="${param.id!=null}"><p style="font-size: x-large" align="center">修改图书信息</p></c:if>
-			<form action="manager/bookController" method="get">
+			<form action="manager/bookController?action=${empty param.id ? "add":"update"}&pageNo=${param.pageNo}&curPageCounts=${param.curPageCounts}&id=${requestScope.book.id}" enctype="multipart/form-data" method="post">
 				<%--通过判断当前id是否为空来确定是修改还是保存操作，为空是保存，非空为修改--%>
-				<input type="hidden" name="action" value="${empty param.id ? "add":"update"}"/>
-				<input type="hidden" name="id" value="${requestScope.book.id}"/>
+<%--				<input type="hidden" name="action" value="${empty param.id ? "add":"update"}"/>--%>
+<%--				<input type="hidden" name="id" value="${requestScope.book.id}"/>--%>
 				<%--获取从book_manager.jsp的添加图书链接传过来的当前页码--%>
-				<input type="hidden" name="pageNo" value="${param.pageNo}"/>
+<%--				<input type="hidden" name="pageNo" value="${param.pageNo}"/>--%>
 				<%--获取从book_manager.jsp的添加图书链接传过来的当前页显示了几条数据--%>
-				<input type="hidden" name="curPageCounts" value="${param.curPageCounts}"/>
+<%--				<input type="hidden" name="curPageCounts" value="${param.curPageCounts}"/>--%>
 				<table>
 					<tr>
 						<td>名称</td>
@@ -50,14 +50,16 @@
 						<td>作者</td>
 						<td>销量</td>
 						<td>库存</td>
+						<td>上传商品封面</td>
 						<td colspan="2">操作</td>
-					</tr>		
+					</tr>
 					<tr>
 						<td><input name="name" type="text" value="${requestScope.book.name}"/></td>
 						<td><input name="price" type="text" value="${requestScope.book.price}"/></td>
 						<td><input name="author" type="text" value="${requestScope.book.author}"/></td>
 						<td><input name="sales" type="text" value="${requestScope.book.sales}"/></td>
 						<td><input name="stock" type="text" value="${requestScope.book.stock}"/></td>
+						<td><input name="cover" type="file"/></td>
 						<td><input type="submit" value="提交"/></td>
 					</tr>	
 				</table>

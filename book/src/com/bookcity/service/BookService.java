@@ -9,6 +9,8 @@ public interface BookService {
 
     public int saveBook(Book book);
 
+    public void uploadCover();
+
     public int deleteBook(Integer id);
 
     public int updateBook(Book book);

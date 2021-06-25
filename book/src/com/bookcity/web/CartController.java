@@ -5,7 +5,7 @@ import com.bookcity.entity.Cart;
 import com.bookcity.entity.CartItem;
 import com.bookcity.service.BookService;
 import com.bookcity.service.impl.BookServiceImpl;
-import com.bookcity.utils.BeanUtils;
+import com.bookcity.utils.Beanutils;
 import com.google.gson.Gson;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class CartController extends BaseServlet {
     //删除列表页面的商品
     public void deleteItem(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //先获取商品id
-        int id = BeanUtils.parseInt(req.getParameter("id"), 0);
+        int id = Beanutils.parseInt(req.getParameter("id"), 0);
         //从session中获取购物车信息
         Cart cart=(Cart) req.getSession().getAttribute("cart");
         if (cart!=null){
@@ -34,7 +34,7 @@ public class CartController extends BaseServlet {
     //通过ajax把列表页面的商品添加到购物车
     public void ajaxAddItem(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //先获取商品id
-        int id = BeanUtils.parseInt(req.getParameter("id"), 0);
+        int id = Beanutils.parseInt(req.getParameter("id"), 0);
         //从数据库查询该商品信息
         Book book = bookService.findById(id);
         //把Book转换成CartItem
@@ -47,7 +47,6 @@ public class CartController extends BaseServlet {
         }
         //往购物车里添加商品
         cart.addItem(cartItem);
-        System.out.println(cart);
 
         //把最后一次添加到购物车的商品的名称添加到session
         req.getSession().setAttribute("lastName", cartItem.getName());
@@ -73,7 +72,7 @@ public class CartController extends BaseServlet {
     //把列表页面的商品添加到购物车
     public void addItem(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //先获取商品id
-        int id = BeanUtils.parseInt(req.getParameter("id"), 0);
+        int id = Beanutils.parseInt(req.getParameter("id"), 0);
         //从数据库查询该商品信息
         Book book = bookService.findById(id);
         //把Book转换成CartItem
@@ -86,11 +85,9 @@ public class CartController extends BaseServlet {
         }
         //往购物车里添加商品
         cart.addItem(cartItem);
-        System.out.println(cart);
 
         //把最后一次添加到购物车的商品的名称添加到session
         req.getSession().setAttribute("lastName", cartItem.getName());
-        System.out.println(req.getSession().getAttribute("lastName"));
 
         //重定向到商品原来所在页面
         resp.sendRedirect(req.getHeader("referer"));
@@ -99,15 +96,14 @@ public class CartController extends BaseServlet {
     //修改商品数量
     public void updateCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //先获取商品id
-        int id = BeanUtils.parseInt(req.getParameter("id"), 0);
+        int id = Beanutils.parseInt(req.getParameter("id"), 0);
         //获取商品的数量
-        int counts = BeanUtils.parseInt(req.getParameter("counts"), 0);
+        int counts = Beanutils.parseInt(req.getParameter("counts"), 0);
         //从session中获取购物车信息
         Cart cart=(Cart) req.getSession().getAttribute("cart");
         if (cart!=null){
             //修改商品数量
             cart.updateItem(id,counts);
-            System.out.println(cart);
             //重定向到商品原来所在页面
             resp.sendRedirect(req.getHeader("referer"));
         }

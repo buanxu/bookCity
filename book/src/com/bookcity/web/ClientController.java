@@ -6,8 +6,7 @@ import com.bookcity.service.BookService;
 import com.bookcity.service.ClientService;
 import com.bookcity.service.impl.BookServiceImpl;
 import com.bookcity.service.impl.ClientServiceImpl;
-import com.bookcity.utils.BeanUtils;
-import com.sun.security.ntlm.Client;
+import com.bookcity.utils.Beanutils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +29,8 @@ public class ClientController extends BaseServlet {
     public void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //获取前台传过来的参数，把前台传过来的数字字符串转成int类型
-        int pageNo= BeanUtils.parseInt(req.getParameter("pageNo"),1);
-        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
+        int pageNo= Beanutils.parseInt(req.getParameter("pageNo"),1);
+        int pageSize= Beanutils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
         //调用service获取Page对象
         Page<Book> page = bookService.page(pageNo, pageSize);
 
@@ -53,10 +52,10 @@ public class ClientController extends BaseServlet {
     public void pageByPrice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //获取前台传过来的参数，把前台传过来的数字字符串转成int类型
-        int pageNo= BeanUtils.parseInt(req.getParameter("pageNo"),1);
-        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
-        int min=BeanUtils.parseInt(req.getParameter("min"), 0);
-        int max=BeanUtils.parseInt(req.getParameter("max"), Integer.MAX_VALUE);
+        int pageNo= Beanutils.parseInt(req.getParameter("pageNo"),1);
+        int pageSize= Beanutils.parseInt(req.getParameter("pageSize"), Page.BOOK_PAGE_SIZE);
+        int min= Beanutils.parseInt(req.getParameter("min"), 0);
+        int max= Beanutils.parseInt(req.getParameter("max"), Integer.MAX_VALUE);
         System.out.println("min："+min);
         System.out.println("max："+max);
         //调用service获取Page对象

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class BaseServlet extends HttpServlet {
     @Override
@@ -17,6 +19,9 @@ public abstract class BaseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //处理上传文件时中文乱码的问题
+        req.setCharacterEncoding("UTF-8");
+
         //解决post请求中文乱码问题
         //要在获取参数之前设置编码
         resp.setCharacterEncoding("utf-8");
@@ -26,8 +31,6 @@ public abstract class BaseServlet extends HttpServlet {
         String action=req.getParameter("action");
         //获取到要调用的方法名来反射对象调用相应方法
         try {
-            System.out.println(this);
-            System.out.println(this.getClass());
             Method method=this.getClass().getDeclaredMethod(action, HttpServletRequest.class,HttpServletResponse.class);
             method.invoke(this, req,resp);
         } catch (Exception e) {

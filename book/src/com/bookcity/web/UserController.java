@@ -3,7 +3,7 @@ package com.bookcity.web;
 import com.bookcity.entity.User;
 import com.bookcity.service.UserService;
 import com.bookcity.service.impl.UserServiceImpl;
-import com.bookcity.utils.BeanUtils;
+import com.bookcity.utils.Beanutils;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -61,13 +62,13 @@ public class UserController extends BaseServlet {
         //删除session中的验证码，以阻止重复提交
         req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
 
-        User user=(User)BeanUtils.copyParamsToBean(new User(),req.getParameterMap());
+        //绑定参数
+        User user=(User) Beanutils.copyParamsToBean(new User(),req.getParameterMap());
 
         //检查验证码
         if(sessionCode!=null && sessionCode.equalsIgnoreCase(code)){//验证码正确
             //再检查用户名是否已存在
             if (userService.existsUsername(username)){//已存在，则跳转到注册页面
-                System.out.println("用户名["+username+"]已存在");
 
                 //返回给前台信息
                 req.setAttribute("errorMsg", "该用户名已存在");
@@ -80,8 +81,6 @@ public class UserController extends BaseServlet {
                 req.getRequestDispatcher("/pages/user/regist_success.jsp").forward(req,resp);
             }
         }else {//验证码错误
-            System.out.println("验证码错误");
-
             //返回给前台信息
             req.setAttribute("errorMsg", "验证码错误");
             req.setAttribute("username",username);

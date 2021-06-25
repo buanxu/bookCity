@@ -7,7 +7,7 @@ import com.bookcity.service.UserService;
 import com.bookcity.service.impl.BookServiceImpl;
 import com.bookcity.service.impl.OrderServiceImpl;
 import com.bookcity.service.impl.UserServiceImpl;
-import com.bookcity.utils.BeanUtils;
+import com.bookcity.utils.Beanutils;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -33,8 +33,8 @@ public class OrderController extends BaseServlet {
      */
     public void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取前台传过来的参数，把前台传过来的数字字符串转成int类型
-        int pageNo=BeanUtils.parseInt(req.getParameter("pageNo"),1);
-        int pageSize=BeanUtils.parseInt(req.getParameter("pageSize"), Page.ORDER_PAGE_SIZE);
+        int pageNo= Beanutils.parseInt(req.getParameter("pageNo"),1);
+        int pageSize= Beanutils.parseInt(req.getParameter("pageSize"), Page.ORDER_PAGE_SIZE);
         //调用service获取Page对象
         Page<UserOrder> page = orderService.page(pageNo, pageSize);
 
@@ -84,7 +84,7 @@ public class OrderController extends BaseServlet {
      */
     public void findOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //先获取用户id
-        Integer userId = BeanUtils.parseInt(req.getParameter("userId"),0);
+        Integer userId = Beanutils.parseInt(req.getParameter("userId"),0);
         //查出用户的所有订单
         List<Order> orders = orderService.findOrder(userId);
         //把order放到request域
