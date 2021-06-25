@@ -55,7 +55,7 @@
 		});
 	</script>
 </head>
-<body style="background-color: darkseagreen">
+<body >
 	<div id="header" >
 			<img class="logo_img" alt="" src="static/img/logo.png" >
 			<span class="wel_word">网上书城</span>
@@ -79,7 +79,7 @@
 				</c:if>
 			</div>
 	</div>
-	<div id="main" style="background-color: #39987c">
+	<div id="main" >
 		<div id="book" >
 			<div class="book_cond" >
 				<form action="client/clientController" method="post">

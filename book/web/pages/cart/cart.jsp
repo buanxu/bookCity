@@ -43,7 +43,6 @@
 	</script>
 </head>
 <body >
-	<br/>
 	<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png" >
 			<span class="wel_word">购物车</span>

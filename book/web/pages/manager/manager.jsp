@@ -14,7 +14,6 @@
 </style>
 </head>
 <body>
-<br/>
 	<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png"/>
 			<span class="wel_word">后台管理系统</span>
@@ -23,7 +22,7 @@
 	</div>
 	
 	<div id="main">
-		<h1>欢迎管理员进入后台管理系统</h1>
+		<h1 style="font-size:x-large">欢迎管理员进入后台管理系统</h1>
 	</div>
 
 	<%--	静态包含页脚--%>

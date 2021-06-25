@@ -33,7 +33,6 @@
 	</script>
 </head>
 <body>
-<br/>
 	<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png"/>
 			<span class="wel_word">订单管理系统</span>
@@ -97,6 +96,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<br/>
 		<br/>
 		<br/>
 		<br/>

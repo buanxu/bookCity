@@ -29,7 +29,6 @@
 	</script>
 </head>
 <body>
-<br/>
 	<div id="header">
 			<img class="logo_img" alt="" src="./static/img/logo.png"/>
 			<span class="wel_word">图书管理系统</span>
@@ -74,6 +73,8 @@
 				<td><a href="./pages/manager/book_edit.jsp?pageNo=${requestScope.page.pageTotal}&curPageCounts=${requestScope.page.items.size()}">添加图书</a></td>
 			</tr>
 		</table>
+		<br/>
+		<br/>
 		<br/>
 		<br/>
 		<br/>

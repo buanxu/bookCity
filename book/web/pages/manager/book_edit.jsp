@@ -23,9 +23,8 @@
 </style>
 </head>
 <body>
-<br/>
 		<div id="header">
-			<img class="logo_img" alt="" src="./static/img/logo.png" >
+			<img class="logo_img" alt="" src="./static/img/logo.png"/>
 			<span class="wel_word">编辑图书</span>
 
 <%--			静态包含  manager模块管理菜单--%>
